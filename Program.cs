@@ -88,7 +88,7 @@ public class Player
     }
 }
 
-public class Game
+public class Game : IGame
 {
     private List<Player> players = new List<Player>();
     private List<Card> shoe = new List<Card>();
@@ -140,7 +140,7 @@ public class Game
             }
             players[playerIndex].AddCards(dealtCards);
             Console.WriteLine(message.Line);
-            Console.WriteLine(message.GameCardsDealtSuccess(numCards,playerNumber));
+            Console.WriteLine(message.GameCardsDealtSuccess(numCards, playerNumber));
         }
         else
         {
@@ -152,7 +152,7 @@ public class Game
     public List<Card> GetListOfCardsPlayer(int playerNumber)
     {
         int playerIndex = playerNumber - 1;
-        if (playerIndex < players.Count && playerIndex>=0)
+        if (playerIndex < players.Count && playerIndex >= 0)
         {
             return players[playerIndex].GetHand();
         }
@@ -254,7 +254,7 @@ public class Game
     }
 }
 
-public class GameHandler
+public class GameHandler : IGameHandler
 {
     private Game game;
     private Messages message;
