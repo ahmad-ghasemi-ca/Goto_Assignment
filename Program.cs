@@ -341,12 +341,13 @@ public class GameHandler
 
 
 
+
 class Program
 {
     static void Main()
     {
         GameHandler gameHandler = new GameHandler();
-        Game game = gameHandler.CreateGame(4, 2); // Creates a game with given number of players and decks and shuffles the shoe.
+        Game game = gameHandler.CreateGame(5, 2); // Creates a game with given number of players and decks and shuffles the shoe.
         game.RemovePlayer(2);
 
         game.ShuffleGameDeck(); // On-demand shuffle of the shoe.
@@ -354,8 +355,10 @@ class Program
         game.DealCardsToPlayer(1, 3); // Deals the given player the given number of cards
         game.DealCardsToPlayer(2, 3);
         game.DealCardsToPlayer(3, 3);
+        game.DealCardsToPlayer(4, 3);
 
-        gameHandler.DisplayReport(1); // Displays the status of the game and especially cards in the hand of the given player.
+
+        gameHandler.DisplayReport(2); // Displays the status of the game and especially cards in the hand of the given player.
         gameHandler.deleteGame();
     }
 }
