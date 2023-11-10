@@ -3,6 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 
+public class Messages
+{
+    public string GameHandlerUndealtCardsPerSuit { get; } = "Undealt cards count per suit are:";
+    public string GameHandlerRemainingCards { get; } = "Remaining cards count are:";
+    public string GameHandlerListPlayersSorted { get; } = "List of players sorted by their hand value";
+    public string GameHandlerNewGameCreated { get; } = "A new game created with players and decks:";
+    public string GameHandlerListCardsplayer { get; } = "List of cards for player";
+    public string GameHandlerInvalidParamforGameCreation { get; } = "Invalid parameters for creating a game.";
+    public string GameHandlerGameDeleted { get; } = "Game ended!";
+
+    public string GameGetCradsErrorNoPlayer(int playerNumber) => $"Get number of Cards Error: player with this number does not exist: {playerNumber}";
+    public string GameDealErrorPlayerDoesNotExist { get; } = "Deal to player Error: The player does not exist in the game";
+    public string GameRemoveErrorPlayerDoseNotExist { get; } = "Remove player Error: This player does not exist in the game";
+    public string GameRemovePlayerSuccess(int playerNumber) => $"The player with this number were removed: {playerNumber}";
+    public string GameCardsDealtSuccess(int numCards, int playerNumber) => $"This numbers of cards were dealt to player: {numCards}, {playerNumber}";
+    public string GameShuffleGameDeckSuccess { get; } = "The shoe was shuffled!";
+    public string GameShuffleGameDeckFailed { get; } = "Shuffle Error: There is not enough cards to shuffle";
+    public string GetPlayerListSortedByTotalValueFailed { get; } = "Player cards list Error: There is no player to get the hand";
+
+    public string Line { get; } = "----------";
+}
 public enum Suit
 {
     Hearts = 1, Spades, Clubs, Diamonds
@@ -318,41 +339,21 @@ public class GameHandler
     }
 }
 
-public class Messages
-{
-    public string GameHandlerUndealtCardsPerSuit { get; } = "Undealt cards count per suit are:";
-    public string GameHandlerRemainingCards { get; } = "Remaining cards count are:";
-    public string GameHandlerListPlayersSorted { get; } = "List of players sorted by their hand value";
-    public string GameHandlerNewGameCreated { get; } = "A new game created with players and decks:";
-    public string GameHandlerListCardsplayer { get; } = "List of cards for player";
-    public string GameHandlerInvalidParamforGameCreation { get; } = "Invalid parameters for creating a game.";
-    public string GameHandlerGameDeleted { get; } = "Game ended!";
 
-    public string GameGetCradsErrorNoPlayer(int playerNumber) => $"Get number of Cards Error: player with this number does not exist: {playerNumber}";
-    public string GameDealErrorPlayerDoesNotExist { get; } = "Deal to player Error: The player does not exist in the game";
-    public string GameRemoveErrorPlayerDoseNotExist { get; } = "Remove player Error: This player does not exist in the game";
-    public string GameRemovePlayerSuccess(int playerNumber) => $"The player with this number were removed: {playerNumber}";
-    public string GameCardsDealtSuccess(int numCards, int playerNumber) => $"This numbers of cards were dealt to player: {numCards}, {playerNumber}";
-    public string GameShuffleGameDeckSuccess { get; } = "The shoe was shuffled!";
-    public string GameShuffleGameDeckFailed { get; } = "Shuffle Error: There is not enough cards to shuffle";
-    public string GetPlayerListSortedByTotalValueFailed { get; } = "Player cards list Error: There is no player to get the hand";
-
-    public string Line { get; } = "----------";
-}
 
 class Program
 {
     static void Main()
     {
         GameHandler gameHandler = new GameHandler();
-        Game game = gameHandler.CreateGame(4, 1); // Creates a game with given number of players and decks and shuffles the shoe.
+        Game game = gameHandler.CreateGame(4, 2); // Creates a game with given number of players and decks and shuffles the shoe.
         game.RemovePlayer(2);
 
         game.ShuffleGameDeck(); // On-demand shuffle of the shoe.
 
-        game.DealCardsToPlayer(1, 1); // Deals the given player the given number of cards
-        game.DealCardsToPlayer(2, 1);
-        game.DealCardsToPlayer(3, 1);
+        game.DealCardsToPlayer(1, 3); // Deals the given player the given number of cards
+        game.DealCardsToPlayer(2, 3);
+        game.DealCardsToPlayer(3, 3);
 
         gameHandler.DisplayReport(1); // Displays the status of the game and especially cards in the hand of the given player.
         gameHandler.deleteGame();
