@@ -271,9 +271,8 @@ public class GameHandler
 
     public void DisplayReport(int playerNumber)
     {
-        int playerIndex = playerNumber - 1;
-        var list = game.GetListOfCardsPlayer(playerIndex);
-        Console.WriteLine("----------");
+        var list = game.GetListOfCardsPlayer(playerNumber);
+        Console.WriteLine(message.Line);
         Console.WriteLine($"{message.GameHandlerListCardsplayer} {playerNumber} is:");  //ToDo check 
 
         foreach (var card in list)
@@ -346,7 +345,7 @@ class Program
     static void Main()
     {
         GameHandler gameHandler = new GameHandler();
-        Game game = gameHandler.CreateGame(2, 1); // Creates a game with given number of players and decks and shuffles the shoe.
+        Game game = gameHandler.CreateGame(4, 1); // Creates a game with given number of players and decks and shuffles the shoe.
         game.RemovePlayer(2);
 
         game.ShuffleGameDeck(); // On-demand shuffle of the shoe.
@@ -355,7 +354,7 @@ class Program
         game.DealCardsToPlayer(2, 1);
         game.DealCardsToPlayer(3, 1);
 
-        gameHandler.DisplayReport(3); // Displays the status of the game and especially cards in the hand of the given player.
+        gameHandler.DisplayReport(1); // Displays the status of the game and especially cards in the hand of the given player.
         gameHandler.deleteGame();
     }
 }
